@@ -1,0 +1,81 @@
+﻿@model N01511170_PassionProject.Models.AlbumViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form action="/Album/Update/@Model.AlbumDto.AlbumId" method="POST" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Album</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AlbumDto.AlbumId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlbumDto.AlbumName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AlbumDto.AlbumName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AlbumDto.AlbumName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlbumDto.Createdby, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AlbumDto.Createdby, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AlbumDto.Createdby, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlbumDto.RelaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AlbumDto.RelaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AlbumDto.RelaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    </form>
+<div class="col-md-6 col-sm-12">
+    <h4>Listed Songs in Album: @Model.AlbumDto.AlbumName:</h4>
+    @foreach (var song in Model.AlreadyAdded)
+    {
+
+        <a href="/Song/Details/@song.SongId">@song.SongName</a> 
+        
+        <a style="color:#ab2020;" href="/Album/UnassociateSong/@Model.AlbumDto.AlbumId?songID=@song.SongId">[x]</a><br />
+    }
+
+<div>
+    
+    <form method="POST" action="/Album/AssociateSong/@Model.AlbumDto.AlbumId">
+        <select name="songID">
+            <option value="">Select Song</option>
+            @foreach (var song in Model.AvailableSongs)
+            {
+                <option value="@song.SongId">@song.SongName</option>
+            }
+
+        </select>
+        <input type="submit" value="Add Song" />
+    </form>
+</div>
+</div>
+
+    <div>
+        @Html.ActionLink("Back to List", "List")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

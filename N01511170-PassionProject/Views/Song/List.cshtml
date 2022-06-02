@@ -1,0 +1,51 @@
+﻿@model IEnumerable<N01511170_PassionProject.Models.SongDTO>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "New")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SongName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SingerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SongName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SingerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Language)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SongId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SongId }) |
+            @Html.ActionLink("Delete", "ConfirmDelete", new { id=item.SongId })
+        </td>
+    </tr>
+}
+
+</table>
