@@ -15,8 +15,7 @@ namespace N01511170_PassionProject.Controllers
     public class AlbumDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/AlbumData
+        
         [HttpGet]
         [ResponseType(typeof(AlbumDTO))]
         public IHttpActionResult ListAlbums()
@@ -35,8 +34,9 @@ namespace N01511170_PassionProject.Controllers
             return Ok(albumDTOs);
         }
 
+       
         [HttpGet]
-       /* [ResponseType(typeof(KeeperDto))]*/
+       
         public IHttpActionResult ListSongsForAlbum(int id)
         {
             List<Song> Songs = db.Songs.Where(
@@ -57,8 +57,9 @@ namespace N01511170_PassionProject.Controllers
             return Ok(SongDtos);
         }
 
+       
         [HttpGet]
-       /* [ResponseType(typeof(KeeperDto))]*/
+       
         public IHttpActionResult ListSongsNotAssignedForAlbum(int id)
         {
             List<Song> Songs = db.Songs.Where(
@@ -79,6 +80,7 @@ namespace N01511170_PassionProject.Controllers
             return Ok(SongDtos);
         }
 
+       
         [HttpPost]
         [Route("api/AlbumData/AssociateSongWithAlbum/{albumId}/{songId}")]
         /*[Authorize]*/
