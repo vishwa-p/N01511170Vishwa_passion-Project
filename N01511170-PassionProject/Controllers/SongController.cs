@@ -31,33 +31,20 @@ namespace N01511170_PassionProject.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            //objective: communicate with our animal data api to retrieve a list of animals
             //curl https://localhost:44370/api/songdata/listsongs
 
 
             string url = "songdata/listsongs";
             HttpResponseMessage response = client.GetAsync(url).Result;
-
-            //Debug.WriteLine("The response code is ");
-            //Debug.WriteLine(response.StatusCode);
-
             IEnumerable<SongDTO> songs = response.Content.ReadAsAsync<IEnumerable<SongDTO>>().Result;
-            //Debug.WriteLine("Number of animals received : ");
-            //Debug.WriteLine(animals.Count());
-
-
             return View(songs);
         }
 
         // GET: Song/Details/5
         public ActionResult Details(int id)
         {
-
             string url = "songdata/findsong/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
-            
-
             SongDTO SelectedSong = response.Content.ReadAsAsync<SongDTO>().Result;
             return View(SelectedSong);
         }
@@ -66,8 +53,6 @@ namespace N01511170_PassionProject.Controllers
         [HttpGet]
         public ActionResult New()
         {
-            
-
             return View();
         }
 
@@ -91,10 +76,6 @@ namespace N01511170_PassionProject.Controllers
                 {
                     return RedirectToAction("Error");
                 }
-
-                // TODO: Add insert logic here
-
-                /*return RedirectToAction("Index");*/
             }
             catch
             {
@@ -107,7 +88,7 @@ namespace N01511170_PassionProject.Controllers
         {
             Song song = new Song();
 
-            //the existing animal information
+            //the existing song information
             string url = "songdata/findsong/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             SongDTO SelectedSong = response.Content.ReadAsAsync<SongDTO>().Result;
@@ -129,15 +110,12 @@ namespace N01511170_PassionProject.Controllers
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    //No image upload, but update still successful
                     return RedirectToAction("List");
                 }
                 else
                 {
                     return RedirectToAction("Error");
                 }
-/*                return RedirectToAction("Index");*/
-
             }
             catch
             {
@@ -150,7 +128,7 @@ namespace N01511170_PassionProject.Controllers
         {
             Song song = new Song();
 
-            //the existing animal information
+            //the existing song information
             string url = "songdata/findsong/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             SongDTO SelectedSong = response.Content.ReadAsAsync<SongDTO>().Result;
@@ -178,7 +156,6 @@ namespace N01511170_PassionProject.Controllers
                 {
                     return RedirectToAction("Error");
                 }
-             /*   return RedirectToAction("Index");*/
             }
             catch
             {

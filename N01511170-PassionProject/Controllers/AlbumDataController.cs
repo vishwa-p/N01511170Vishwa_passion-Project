@@ -15,7 +15,16 @@ namespace N01511170_PassionProject.Controllers
     public class AlbumDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
+        /// <summary>
+        /// Returns all Albums in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all Albums in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/AlbumData/ListAlbums
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(AlbumDTO))]
         public IHttpActionResult ListAlbums()
@@ -34,7 +43,17 @@ namespace N01511170_PassionProject.Controllers
             return Ok(albumDTOs);
         }
 
-       
+        /// <summary>
+        /// Gathers information about all Albums
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all Albums in the database
+        /// </returns>
+        /// <param name="id">Album ID.</param>
+        /// <example>
+        /// GET: api/AlbumData/ListSongsForAlbum/3
+        /// </example>
         [HttpGet]
        
         public IHttpActionResult ListSongsForAlbum(int id)
@@ -80,7 +99,20 @@ namespace N01511170_PassionProject.Controllers
             return Ok(SongDtos);
         }
 
-       
+        /// <summary>
+        /// Associates a particular song with a particular album
+        /// </summary>
+        /// <param name="albumid">The album ID primary key</param>
+        /// <param name="songid">The song ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST api/AlbumData/AssociateSongWithAlbum/9/1
+        /// </example>
+
         [HttpPost]
         [Route("api/AlbumData/AssociateSongWithAlbum/{albumId}/{songId}")]
         /*[Authorize]*/
@@ -102,6 +134,19 @@ namespace N01511170_PassionProject.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Removes an association between a particular song and a particular album
+        /// </summary>
+        /// <param name="songid">The song ID primary key</param>
+        /// <param name="albumid">The album ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST api/AlbumData/UnassociateSongWithAlbum/9/1
+        /// </example>
         [HttpPost]
         [Route("api/AlbumData/UnassociateSongWithAlbum/{albumId}/{songId}")]
         /*[Authorize]*/
@@ -124,7 +169,19 @@ namespace N01511170_PassionProject.Controllers
         }
 
 
-
+        /// <summary>
+        /// Returns all albums in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: An album in the system matching up to the song ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the album</param>
+        /// <example>
+        /// GET: api/albumData/FindAlbum/5
+        /// </example>
         // GET: api/AlbumData/5
         [ResponseType(typeof(Album))]
         [HttpGet]
@@ -148,6 +205,22 @@ namespace N01511170_PassionProject.Controllers
             return Ok(album);
         }
 
+        /// <summary>
+        /// Updates a particular album in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the album ID primary key</param>
+        /// <param name="album">JSON FORM DATA of an album</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/AlbumData/UpdateAlbum/5
+        /// FORM DATA: album JSON Object
+        /// </example>
         // PUT: api/AlbumData/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -185,6 +258,21 @@ namespace N01511170_PassionProject.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Adds an album to the system
+        /// </summary>
+        /// <param name="album">JSON FORM DATA of an album</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: album ID, album Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/AlbumData/AddAlbum
+        /// FORM DATA: Album JSON Object
+        /// </example>
+
         // POST: api/AlbumData
         [ResponseType(typeof(Album))]
         [HttpPost]
@@ -202,6 +290,20 @@ namespace N01511170_PassionProject.Controllers
             return CreatedAtRoute("DefaultApi", new { id = album.AlbumId }, album);
         }
 
+
+        /// <summary>
+        /// Deletes an album from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the album</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/AlbumData/DeleteAlbum/5
+        /// FORM DATA: (empty)
+        /// </example>
         // DELETE: api/AlbumData/5
         [ResponseType(typeof(Album))]
         [HttpPost]

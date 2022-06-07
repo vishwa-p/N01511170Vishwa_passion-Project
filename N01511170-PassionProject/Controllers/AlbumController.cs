@@ -32,21 +32,11 @@ namespace N01511170_PassionProject.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            //objective: communicate with our animal data api to retrieve a list of animals
+           
             //curl https://localhost:44370/api/albumdata/listalbums
-
-
             string url = "albumdata/listalbums";
             HttpResponseMessage response = client.GetAsync(url).Result;
-
-            //Debug.WriteLine("The response code is ");
-            //Debug.WriteLine(response.StatusCode);
-
             IEnumerable<AlbumDTO> albums = response.Content.ReadAsAsync<IEnumerable<AlbumDTO>>().Result;
-            //Debug.WriteLine("Number of animals received : ");
-            //Debug.WriteLine(animals.Count());
-
-
             return View(albums);
         }
 
@@ -62,14 +52,12 @@ namespace N01511170_PassionProject.Controllers
             AlbumDTO SelectedAlbum = response.Content.ReadAsAsync<AlbumDTO>().Result;
             return View(SelectedAlbum);
         }
+
         [HttpPost]
         /*[Authorize]*/
         public ActionResult AssociateSong(int id, int songID)
         {
-           /* GetApplicationCookie();//get token credentials*/
-            
-
-            //call our api to associate animal with keeper
+         
             string url = "albumdata/AssociateSongWithAlbum/" + id + "/" + songID;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
@@ -82,9 +70,6 @@ namespace N01511170_PassionProject.Controllers
        /* [Authorize]*/
         public ActionResult UnAssociateSong(int id, int songID)
         {
-         
-
-            //call our api to unassociate animal with keeper
             string url = "albumdata/UnassociateSongWithAlbum/" + id + "/" + songID;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
@@ -97,8 +82,6 @@ namespace N01511170_PassionProject.Controllers
         [HttpGet]
         public ActionResult New()
         {
-
-
             return View();
         }
 
@@ -122,10 +105,6 @@ namespace N01511170_PassionProject.Controllers
                 {
                     return RedirectToAction("Error");
                 }
-
-                // TODO: Add insert logic here
-
-                /*return RedirectToAction("Index");*/
             }
             catch
             {
@@ -137,16 +116,10 @@ namespace N01511170_PassionProject.Controllers
         public ActionResult Edit(int id)
         {
             AlbumViewModel albumviewmodel=new AlbumViewModel();
-
-            //the existing animal information
             string url = "albumdata/findalbum/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             AlbumDTO SelectedAlbum = response.Content.ReadAsAsync<AlbumDTO>().Result;
-           
-
             albumviewmodel.AlbumDto = SelectedAlbum;
-
-            //show associated keepers with this animal
             url = "albumdata/ListSongsForAlbum/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<SongDTO> AssignedSongs = response.Content.ReadAsAsync<IEnumerable<SongDTO>>().Result;
@@ -181,15 +154,12 @@ namespace N01511170_PassionProject.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    //No image upload, but update still successful
                     return RedirectToAction("List");
                 }
                 else
                 {
                     return RedirectToAction("Error");
                 }
-                /*                return RedirectToAction("Index");*/
-
             }
             catch
             {
@@ -202,7 +172,7 @@ namespace N01511170_PassionProject.Controllers
         {
             Song song = new Song();
 
-            //the existing animal information
+            //the existing album information
             string url = "albumdata/findalbum/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             AlbumDTO SelectedAlbum = response.Content.ReadAsAsync<AlbumDTO>().Result;
@@ -230,7 +200,6 @@ namespace N01511170_PassionProject.Controllers
                 {
                     return RedirectToAction("Error");
                 }
-                /*   return RedirectToAction("Index");*/
             }
             catch
             {

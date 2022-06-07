@@ -16,6 +16,16 @@ namespace N01511170_PassionProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /// <summary>
+        /// Returns all songs in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all songs in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/SongData/ListSongs
+        /// </example>
         // GET: api/SongData
         [HttpGet]
         [ResponseType(typeof(SongDTO))]
@@ -36,7 +46,19 @@ namespace N01511170_PassionProject.Controllers
         }
 
 
-
+        /// <summary>
+        /// Returns all Songs in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: An Song in the system 
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the song</param>
+        /// <example>
+        /// GET: api/songData/FindSong/5
+        /// </example>
         // GET: api/SongData/5
         [ResponseType(typeof(SongDTO))]
         [HttpGet]
@@ -60,6 +82,23 @@ namespace N01511170_PassionProject.Controllers
 
             return Ok(SongDTO);
         }
+
+        /// <summary>
+        /// Updates a particular song in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the song ID primary key</param>
+        /// <param name="song">JSON FORM DATA of a song</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/SongData/UpdateSong/5
+        /// FORM DATA: song JSON Object
+        /// </example>
 
         // PUT: api/SongData/5
         [ResponseType(typeof(void))]
@@ -98,6 +137,20 @@ namespace N01511170_PassionProject.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Adds a song to the system
+        /// </summary>
+        /// <param name="song">JSON FORM DATA of  song</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: song ID, song Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/songData/AddSong
+        /// FORM DATA: song JSON Object
+        /// </example>
         // POST: api/SongData
         [ResponseType(typeof(Song))]
         [HttpPost]
@@ -115,6 +168,19 @@ namespace N01511170_PassionProject.Controllers
             return CreatedAtRoute("DefaultApi", new { id = song.SongId }, song);
         }
 
+        /// <summary>
+        /// Deletes a song from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the song</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/SongData/DeleteSong/5
+        /// FORM DATA: (empty)
+        /// </example>
         // DELETE: api/SongData/5
         [ResponseType(typeof(Song))]
         [HttpPost]
