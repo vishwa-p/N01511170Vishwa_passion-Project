@@ -16,17 +16,17 @@ namespace N01511170_PassionProject.Controllers
 
         static SongController()
         {
-           /* HttpClientHandler handler = new HttpClientHandler()
+            HttpClientHandler handler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false,
                 //cookies are manually set in RequestHeader
                 UseCookies = false
-            };*/
+            };
 
             client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:44370/api/");
         }
-
+       
         // GET: Song
         [HttpGet]
         public ActionResult List()
@@ -58,11 +58,13 @@ namespace N01511170_PassionProject.Controllers
 
         // POST: Song/Create
         [HttpPost]
+       /* [Authorize]*/
         public ActionResult Create(Song song)
         {
             
             try
             {
+               
                 string url = "songdata/addsong";
                 string jsonpayload = jss.Serialize(song);
                 HttpContent content = new StringContent(jsonpayload);
@@ -84,6 +86,7 @@ namespace N01511170_PassionProject.Controllers
         }
 
         // GET: Song/Edit/5
+     /*   [Authorize]*/
         public ActionResult Edit(int id)
         {
             Song song = new Song();
@@ -98,11 +101,13 @@ namespace N01511170_PassionProject.Controllers
 
         // POST: Song/Edit/5
         [HttpPost]
+     /*   [Authorize]*/
         public ActionResult Update(int id, Song song)
         {
             try
             {
                 // TODO: Add update logic here
+               
                 string url = "songdata/updatesong/" + id;
                 string jsonpayload = jss.Serialize(song);
                 HttpContent content = new StringContent(jsonpayload);
@@ -123,7 +128,9 @@ namespace N01511170_PassionProject.Controllers
             }
         }
 
+
         // GET: Song/Delete/5
+        /*[Authorize]*/
         public ActionResult ConfirmDelete(int id)
         {
             Song song = new Song();
@@ -138,11 +145,13 @@ namespace N01511170_PassionProject.Controllers
 
         // POST: Song/Delete/5
         [HttpPost]
+     /*   [Authorize]*/
         public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
+               
                 string url = "songdata/deletesong/" + id;
                 HttpContent content = new StringContent("");
                 content.Headers.ContentType.MediaType = "application/json";

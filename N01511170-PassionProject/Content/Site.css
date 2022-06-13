@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+/*.albuimlist {
+    background-image: url('https://assets.bravenet.com/braveuistatic/img/apps/www.bravenet.com/src/assets/img/photoalbums/bravenet_photo_albums_easy_upload.png');
+}*/
+button{
+    background-color:antiquewhite;
+    width:100px;
+    height:30px;
+    
+}
+

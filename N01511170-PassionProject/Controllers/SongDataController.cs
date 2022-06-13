@@ -103,7 +103,7 @@ namespace N01511170_PassionProject.Controllers
         // PUT: api/SongData/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        /*[Authorize]*/
+    /*    [Authorize]*/
         public IHttpActionResult UpdateSong(int id, Song song)
         {
             if (!ModelState.IsValid)
@@ -154,7 +154,7 @@ namespace N01511170_PassionProject.Controllers
         // POST: api/SongData
         [ResponseType(typeof(Song))]
         [HttpPost]
-        /*[Authorize]*/
+       /* [Authorize]*/
         public IHttpActionResult AddSong(Song song)
         {
             if (!ModelState.IsValid)
@@ -184,7 +184,7 @@ namespace N01511170_PassionProject.Controllers
         // DELETE: api/SongData/5
         [ResponseType(typeof(Song))]
         [HttpPost]
-        /*[Authorize]*/
+    /*    [Authorize]*/
         public IHttpActionResult DeleteSong(int id)
         {
             Song song = db.Songs.Find(id);

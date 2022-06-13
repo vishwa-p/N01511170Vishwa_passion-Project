@@ -17,12 +17,12 @@ namespace N01511170_PassionProject.Controllers
 
         static AlbumController()
         {
-            /* HttpClientHandler handler = new HttpClientHandler()
-             {
-                 AllowAutoRedirect = false,
-                 //cookies are manually set in RequestHeader
-                 UseCookies = false
-             };*/
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                //cookies are manually set in RequestHeader
+                UseCookies = false
+            };
 
             client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:44370/api/");
@@ -54,7 +54,7 @@ namespace N01511170_PassionProject.Controllers
         }
 
         [HttpPost]
-        /*[Authorize]*/
+      /*  [Authorize]*/
         public ActionResult AssociateSong(int id, int songID)
         {
          
@@ -87,6 +87,7 @@ namespace N01511170_PassionProject.Controllers
 
         // POST: album/Create
         [HttpPost]
+       /* [Authorize]*/
         public ActionResult Create(Album album)
         {
 
@@ -113,6 +114,7 @@ namespace N01511170_PassionProject.Controllers
         }
 
         // GET: album/Edit/5
+       /* [Authorize]*/
         public ActionResult Edit(int id)
         {
             AlbumViewModel albumviewmodel=new AlbumViewModel();
@@ -140,14 +142,20 @@ namespace N01511170_PassionProject.Controllers
 
         // POST: album/Edit/5
         [HttpPost]
-        public ActionResult Update(int id, Album album)
+       /* [Authorize]*/
+        public ActionResult Update(int id, AlbumViewModel album)
         {
             try
             {
 
                 // TODO: Add update logic here
+                Album album1 = new Album();
+                album1.AlbumId = album.AlbumDto.AlbumId;
+                album1.AlbumName = album.AlbumDto.AlbumName;
+                album1.Createdby= album.AlbumDto.Createdby;
+                album1.RelaseDate = album.AlbumDto.RelaseDate;
                 string url = "albumdata/updatealbum/" + id;
-                string jsonpayload = jss.Serialize(album);
+                string jsonpayload = jss.Serialize(album1);
                 HttpContent content = new StringContent(jsonpayload);
                 content.Headers.ContentType.MediaType = "application/json";
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
@@ -168,6 +176,7 @@ namespace N01511170_PassionProject.Controllers
         }
 
         // GET: album/Delete/5
+       /* [Authorize]*/
         public ActionResult ConfirmDelete(int id)
         {
             Song song = new Song();
@@ -182,6 +191,7 @@ namespace N01511170_PassionProject.Controllers
 
         // POST: album/Delete/5
         [HttpPost]
+     /*   [Authorize]*/
         public ActionResult Delete(int id)
         {
             try

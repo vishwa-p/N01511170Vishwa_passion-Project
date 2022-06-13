@@ -149,7 +149,7 @@ namespace N01511170_PassionProject.Controllers
         /// </example>
         [HttpPost]
         [Route("api/AlbumData/UnassociateSongWithAlbum/{albumId}/{songId}")]
-        /*[Authorize]*/
+       /* [Authorize]*/
         public IHttpActionResult UnassociateSongWithAlbum(int albumId, int songId)
         {
 
@@ -276,7 +276,7 @@ namespace N01511170_PassionProject.Controllers
         // POST: api/AlbumData
         [ResponseType(typeof(Album))]
         [HttpPost]
-        /*[Authorize]*/
+       /* [Authorize]*/
         public IHttpActionResult AddAlbum(Album album)
         {
             if (!ModelState.IsValid)
@@ -307,7 +307,7 @@ namespace N01511170_PassionProject.Controllers
         // DELETE: api/AlbumData/5
         [ResponseType(typeof(Album))]
         [HttpPost]
-       /* [Authorize]*/
+      /*  [Authorize]*/
         public IHttpActionResult DeleteAlbum(int id)
         {
             Album album = db.Albums.Find(id);
