@@ -28,6 +28,7 @@ namespace N01511170_PassionProject.Models
        
         public DateTime RelaseDate { get; set; }
        
+       
     }
     public class AlbumViewModel
     {

@@ -1,4 +1,4 @@
-﻿@model N01511170_PassionProject.Models.AlbumDTO
+﻿@model N01511170_PassionProject.Models.AlbumViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,32 +11,48 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AlbumName)
+            @Html.DisplayNameFor(model => model.AlbumDto.AlbumName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AlbumName)
+            @Html.DisplayFor(model => model.AlbumDto.AlbumName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AlbumDto.Createdby)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlbumDto.Createdby)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Createdby)
+            @Html.DisplayNameFor(model => model.AlbumDto.RelaseDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Createdby)
+            @Html.DisplayFor(model => model.AlbumDto.RelaseDate)
         </dd>
-
+    </dl>
+    <dl>
         <dt>
-            @Html.DisplayNameFor(model => model.RelaseDate)
+
+            Songs in @Html.DisplayFor(model => model.AlbumDto.AlbumName)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.RelaseDate)
+            <ul>
+                @foreach (var song in Model.AlreadyAdded)
+                {
+                    <li>
+                        @song.SongName
+                    </li>
+                    @*<option value="@song.SongId">@song.SongName</option>*@
+                }
+            </ul>
         </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumId }) |
+    
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumDto.AlbumId }) |
     @Html.ActionLink("Back to List", "List")
 </p>

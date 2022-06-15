@@ -5,14 +5,14 @@
 }
 
 <h2>Edit</h2>
-<section class="albumedit">
-    <div class="editform">
+
+    
         <form action="/Album/Update/@Model.AlbumDto.AlbumId" method="POST" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
                 <h4>Album</h4>
-                <hr />
+                @* <hr />*@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.AlbumDto.AlbumId)
 
@@ -47,14 +47,14 @@
                 </div>
             </div>
             <div>
-                @Html.ActionLink("Back to List", "List")
-                <button><a href="/Song/list">Back to List</a></button>
+
+                <button><a href="/Album/list">Back to List</a></button>
             </div>
         </form>
-    </div>
-    <div class="availblesong">
+    
+   
         <div class="col-md-6 col-sm-12">
-            <h4>Listed Songs in Album: @Model.AlbumDto.AlbumName:</h4>
+            <h4>Listed Songs in Album <b>@Model.AlbumDto.AlbumName:</b></h4>
             @foreach (var song in Model.AlreadyAdded)
             {
 
@@ -79,9 +79,10 @@
             </div>
         </div>
 
-       
-    </div>
-</section>
+
+    
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+
+   

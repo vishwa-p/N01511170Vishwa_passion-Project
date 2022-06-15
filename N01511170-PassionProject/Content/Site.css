@@ -1,7 +1,22 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color:antiquewhite;
+    font-size:15px;
 }
+    body::after {
+        content: "";
+        background: url('https://images.pexels.com/photos/1677710/pexels-photo-1677710.jpeg?cs=srgb&dl=pexels-wendy-wei-1677710.jpg&fm=jpg');
+        opacity: 0.1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+        background-size: 1500px 700px;
+        background-repeat: no-repeat;
+    }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -22,13 +37,98 @@ select,
 textarea {
     max-width: 280px;
 }
-/*.albuimlist {
-    background-image: url('https://assets.bravenet.com/braveuistatic/img/apps/www.bravenet.com/src/assets/img/photoalbums/bravenet_photo_albums_easy_upload.png');
-}*/
+
 button{
     background-color:antiquewhite;
     width:100px;
-    height:30px;
-    
+    height:30px; 
+}
+.songlist {
+    background-color: blanchedalmond;
+    border: 0px solid #d3d3ed;
+    margin-top: 8px;
+    border-radius: 23px;
+    background: linear-gradient(-45deg, #f6e1db, #aa9ea3, #e4eef2, #f0f6f5);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.songlist h2{
+    text-align:center;
+}
+.albuimlist h2 {
+    text-align: center;
+}
+.albuimlist {
+    background-color: blanchedalmond;
+    border: 0px solid #d3d3ed;
+    margin-top: 8px;
+    border-radius: 23px;
+    background: linear-gradient(-45deg, #f6e1db, #aa9ea3, #e4eef2, #f0f6f5);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+button {
+    animation: wiggle 2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes wiggle {
+    0%, 7% {
+        transform: rotateZ(0);
+    }
+
+    15% {
+        transform: rotateZ(-15deg);
+    }
+
+    20% {
+        transform: rotateZ(10deg);
+    }
+
+    25% {
+        transform: rotateZ(-10deg);
+    }
+
+    30% {
+        transform: rotateZ(6deg);
+    }
+
+    35% {
+        transform: rotateZ(-4deg);
+    }
+
+    40%, 100% {
+        transform: rotateZ(0);
+    }
+}
+
+button {
+    
+    left: calc(50% - 3em);
+    top: calc(50% - 2em);
+    height: 4em;
+    width: 7em;
+    background: #e6e9e6;
+    background: linear-gradient(top, #555, #333);
+    border: none;
+    border-top: 3px solid orange;
+    border-radius: 0 0 0.2em 0.2em;
+    color: #fff;
+    font-family: Helvetica, Arial, Sans-serif;
+    font-size: 1em;
+    transform-origin: 50% 5em;
+}

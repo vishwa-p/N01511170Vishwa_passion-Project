@@ -44,13 +44,21 @@ namespace N01511170_PassionProject.Controllers
         public ActionResult Details(int id)
         {
 
+            /*string url = "albumdata/findalbum/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;*/
+            AlbumViewModel albumviewmodel = new AlbumViewModel();
             string url = "albumdata/findalbum/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
-
-
             AlbumDTO SelectedAlbum = response.Content.ReadAsAsync<AlbumDTO>().Result;
-            return View(SelectedAlbum);
+            albumviewmodel.AlbumDto = SelectedAlbum;
+            url = "albumdata/ListSongsForAlbum/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<SongDTO> AssignedSongs = response.Content.ReadAsAsync<IEnumerable<SongDTO>>().Result;
+            albumviewmodel.AlreadyAdded = AssignedSongs;
+
+
+            /*AlbumDTO SelectedAlbum = response.Content.ReadAsAsync<AlbumDTO>().Result;*/
+            return View(albumviewmodel);
         }
 
         [HttpPost]
@@ -125,19 +133,13 @@ namespace N01511170_PassionProject.Controllers
             url = "albumdata/ListSongsForAlbum/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<SongDTO> AssignedSongs = response.Content.ReadAsAsync<IEnumerable<SongDTO>>().Result;
-
             albumviewmodel.AlreadyAdded = AssignedSongs;
 
             url = "albumdata/ListSongsNotAssignedForAlbum/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<SongDTO> NotAssignedSongs = response.Content.ReadAsAsync<IEnumerable<SongDTO>>().Result;
-
             albumviewmodel.AvailableSongs = NotAssignedSongs;
-
-
             return View(albumviewmodel);
-
-            
         }
 
         // POST: album/Edit/5
